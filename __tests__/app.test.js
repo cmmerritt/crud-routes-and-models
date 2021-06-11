@@ -2,8 +2,9 @@ import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
+import Cat from '../lib/models/Cat.js';
 
-describe(' routes', () => {
+describe('cat routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
@@ -21,4 +22,19 @@ describe(' routes', () => {
       age: 42,
     });
   });
+
+  it('finds a cat by id via GET', async () => {
+    const cat = await Cat.insert({
+      name: 'heathcliff',
+      type: 'tabby',
+      weight: '30 lbs',
+      age: 55,
+    });
+
+    const res = await request(app)
+      .get(`/api/v1/cats/${cat.id}`);
+
+    expect(res.body).toEqual(cat);
+  });
+
 });
