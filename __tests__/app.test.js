@@ -10,8 +10,8 @@ describe(' routes', () => {
 
   it('creates a cat via POST', async () => {
     const res = await request(app)
-      .post('api/v1/cats')
-      .semd({ name: 'garfield', type: 'tabby', weight: '50 lbs', age: 42 });
+      .post('/api/v1/cats')
+      .send({ name: 'garfield', type: 'tabby', weight: '50 lbs', age: 42 });
 
     expect(res.body).toEqual({
       id: '1',
@@ -20,5 +20,5 @@ describe(' routes', () => {
       weight: '50 lbs',
       age: 42,
     });
-  }) ;
+  });
 });
