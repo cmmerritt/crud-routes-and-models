@@ -63,4 +63,38 @@ describe('cat routes', () => {
 
     expect(res.body).toEqual([garfield, heathcliff, littleKitty]);
   });
+
+  it('DELETE cat by id', async () => {
+    const littleKitty = await Cat.insert({
+      name: 'little kitty',
+      type: 'tabby',
+      weight: '12 lbs',
+      age: 12,
+    });
+    const res = await request(app).delete(`/api/v1/cats/${littleKitty.id}`);
+    expect(res.body).toEqual(littleKitty);
+  });
+
+  it('UPDATES cat by id', async () => {
+    const littleKitty = await Cat.insert({
+      name: 'little kitty',
+      type: 'tabby',
+      weight: '12 lbs',
+      age: 12,
+    });
+
+    const updatedLittleKitty = { 
+      name: 'little kitty',
+      type: 'tabby with white patches',
+      weight: '12 lbs',
+      age: 12,
+      id: '1'
+    };
+
+    const res = await request(app).put(`/api/v1/cats/${littleKitty.id}`).send(updatedLittleKitty);
+    expect(res.body).toEqual(updatedLittleKitty);
+  });
 });
+
+
+
