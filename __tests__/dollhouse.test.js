@@ -48,4 +48,17 @@ describe('dollhouse routes', () => {
 
     expect(res.body).toEqual([dollhouse1, dollhouse2]);
   });
+
+  it('UPDATES dollhouse by id', async () => {
+    const dollhouse = await Dollhouse.insert(fairfield);
+
+    const updatedDollhouse = {
+      name: 'Greenleaf Fairfield',
+      scale: '1/24',
+      price: 89,
+    };
+
+    const res = await request(app).put(`/api/v1/dollhouses/${dollhouse.id}`).send(updatedDollhouse);
+    expect(res.body).toEqual({ 'id': '1', ...updatedDollhouse });
+  });
 });
