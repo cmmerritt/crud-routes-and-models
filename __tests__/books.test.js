@@ -29,11 +29,11 @@ describe('book routes', () => {
     expect(res.body).toEqual({ id: '1', ...rebecca });
   });
 
-  it('finds a book via GET', async () => {
+  it('finds a book by id via GET', async () => {
     const book = await Book.insert(rebecca);
 
     const res = await request(app)
-      .get(`/api/v1/books/${book}`);
+      .get(`/api/v1/books/${book.id}`);
 
     expect(res.body).toEqual(book);
   });
