@@ -46,5 +46,19 @@ describe('book routes', () => {
 
     expect(res.body).toEqual([book1, book2]);
   });
+
+  it('UPDATES book by id', async () => {
+    const book = await Book.insert(rebecca);
+
+    const updatedBook = {
+      name: 'Rebecca: A New Novel',
+      author: 'Daphne du Maurier',
+      year: 1938
+    };
+
+    const res = await (await request(app).put(`/api/v1/books/${book.id}`)).setEncoding(updatedBook);
+
+    expect(res.body).toEqual({ 'id': '1', ...updatedBook });
+  });
 });
 
