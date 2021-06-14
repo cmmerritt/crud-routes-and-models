@@ -51,12 +51,12 @@ describe('book routes', () => {
     const book = await Book.insert(rebecca);
 
     const updatedBook = {
-      name: 'Rebecca: A New Novel',
+      title: 'Rebecca: A New Novel',
       author: 'Daphne du Maurier',
       year: 1938
     };
 
-    const res = await (await request(app).put(`/api/v1/books/${book.id}`)).setEncoding(updatedBook);
+    const res = await request(app).put(`/api/v1/books/${book.id}`).send(updatedBook);
 
     expect(res.body).toEqual({ 'id': '1', ...updatedBook });
   });
