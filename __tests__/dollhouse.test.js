@@ -34,11 +34,18 @@ describe('dollhouse routes', () => {
   it('finds a dollhouse by id via GET', async () => {
     const dollhouse = await Dollhouse.insert(storybook);
 
-    console.log(dollhouse);
-
     const res = await request(app)
       .get(`/api/v1/dollhouses/${dollhouse.id}`);
 
     expect(res.body).toEqual(dollhouse);
+  });
+
+  it('finds all dollhouses via GET', async () => {
+    const dollhouse1 = await Dollhouse.insert(fairfield);
+    const dollhouse2 = await Dollhouse.insert(storybook);
+
+    const res = await request(app).get('/api/v1/dollhouses');
+
+    expect(res.body).toEqual([dollhouse1, dollhouse2]);
   });
 });
