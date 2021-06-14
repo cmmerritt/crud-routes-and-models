@@ -2,6 +2,7 @@ import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
+import Book from '../lib/models/Book.js';
 
 const rebecca = {
   title: 'Rebecca',
@@ -26,6 +27,15 @@ describe('book routes', () => {
       .send(rebecca);
 
     expect(res.body).toEqual({ id: '1', ...rebecca });
+  });
+
+  it('finds a book via GET', async () => {
+    const book = await Book.insert(rebecca);
+
+    const res = await request(app)
+      .get(`/api/v1/books/${book}`);
+
+    expect(res.body).toEqual(book);
   });
 });
 
