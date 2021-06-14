@@ -10,6 +10,12 @@ const portal = {
   rating: 5
 };
 
+const revolution = {
+  title: 'Deus Ex: Human Revolution',
+  studio: 'Eidos',
+  rating: 5
+};
+
 describe('game routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -29,5 +35,14 @@ describe('game routes', () => {
     const res = await request(app).get(`/api/v1/games/${game.id}`);
 
     expect(res.body).toEqual(game);
+  });
+
+  it('finds all games via GET', async () => {
+    const game1 = await Game.insert(portal);
+    const game2 = await Game.insert(revolution);
+
+    const res = await request(app).get('/api/v1/games');
+
+    expect(res.body).toEqual([game1, game2]);
   });
 });
