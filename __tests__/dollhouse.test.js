@@ -2,7 +2,6 @@ import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
-import Cat from '../lib/models/Cat.js';
 import Dollhouse from '../lib/models/Dollhouse.js';
 
 const fairfield = {
@@ -35,9 +34,11 @@ describe('dollhouse routes', () => {
   it('finds a dollhouse by id via GET', async () => {
     const dollhouse = await Dollhouse.insert(storybook);
 
-    const res = await request(app).get(`/api/v1/dollhouses/${dollhouse.id}`);
+    console.log(dollhouse);
+
+    const res = await request(app)
+      .get(`/api/v1/dollhouses/${dollhouse.id}`);
 
     expect(res.body).toEqual(dollhouse);
   });
-
 });
