@@ -60,5 +60,11 @@ describe('book routes', () => {
 
     expect(res.body).toEqual({ 'id': '1', ...updatedBook });
   });
+
+  it('DELETES book by id', async () => {
+    const book = await Book.insert(castle);
+    const res = await request(app).delete(`/api/v1/books/${book.id}`);
+    expect(res.body).toEqual(book);
+  });
 });
 
