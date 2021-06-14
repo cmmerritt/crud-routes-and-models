@@ -58,4 +58,10 @@ describe('painting routes', () => {
     const res = await request(app).put(`/api/v1/paintings/${painting.id}`).send(updatedPainting);
     expect(res.body).toEqual({ 'id': '1', ...updatedPainting });
   });
+
+  it('DELETES painting by id', async () => {
+    const painting = await Painting.insert(rocks);
+    const res = await request(app).delete(`/api/v1/paintings/${painting.id}`);
+    expect(res.body).toEqual(painting);
+  });
 });
