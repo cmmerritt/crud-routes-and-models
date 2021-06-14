@@ -46,4 +46,16 @@ describe('painting routes', () => {
 
     expect(res.body).toEqual([painting1, painting2]);
   });
+
+  it('UPDATES painting by id', async () => {
+    const painting = await Painting.insert(rocks);
+    const updatedPainting = {
+      title: 'Virgin of the Rocks',
+      museum: 'Louvre',
+      artist: 'Leonardo da Vinci'
+    };
+
+    const res = await (await request(app).put(`/api/v1/paintings/${painting.id}`)).setEncoding(updatedPainting);
+    expect(res.body).toEqual({ 'id': '1', ...updatedPainting });
+  });
 });
