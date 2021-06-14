@@ -61,4 +61,10 @@ describe('dollhouse routes', () => {
     const res = await request(app).put(`/api/v1/dollhouses/${dollhouse.id}`).send(updatedDollhouse);
     expect(res.body).toEqual({ 'id': '1', ...updatedDollhouse });
   });
+
+  it('DELETES dollhouse by id', async () => {
+    const dollhouse = await Dollhouse.insert(fairfield);
+    const res = await request(app).delete(`/api/v1/dollhouses/${dollhouse.id}`);
+    expect(res.body).toEqual(dollhouse);
+  });
 });
