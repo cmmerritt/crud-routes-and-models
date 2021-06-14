@@ -45,4 +45,18 @@ describe('game routes', () => {
 
     expect(res.body).toEqual([game1, game2]);
   });
+
+  it('updates game by id via PUT', async () => {
+    const game = await Game.insert(portal);
+
+    const updatedGame = {
+      title: 'Portal',
+      studio: 'Valve',
+      rating: 4
+    };
+
+    const res = await request(app).put(`/api/v1/games/${game.id}`).send(updatedGame);
+
+    expect(res.body).toEqual({ 'id': '1', ...updatedGame });
+  });
 });
