@@ -37,4 +37,13 @@ describe('painting routes', () => {
     
     expect(res.body).toEqual(painting);
   });
+
+  it('finds all paintings via GET', async () => {
+    const painting1 = await Painting.insert(rocks);
+    const painting2 = await Painting.insert(ermine);
+
+    const res = await request(app).get('/api/v1/paintings');
+
+    expect(res.body).toEqual([painting1, painting2]);
+  });
 });
