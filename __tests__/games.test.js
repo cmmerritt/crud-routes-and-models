@@ -19,6 +19,6 @@ describe('game routes', () => {
       .post('/api/v1/games')
       .send(portal);
 
-    expect(res.body).toEqual({ 'id': 1, ...portal });
+    expect(res.body).toEqual({ 'id': '1', ...portal });
   });
 });
