@@ -10,11 +10,11 @@ const rebecca = {
   year: 1938
 };
 
-/* const castle = {
+const castle = {
   title: 'We Have Always Lived in the Castle',
   author: 'Shirley Jackson',
   year: 1962
-}; */
+}; 
 
 describe('book routes', () => {
   beforeEach(() => {
@@ -36,6 +36,15 @@ describe('book routes', () => {
       .get(`/api/v1/books/${book.id}`);
 
     expect(res.body).toEqual(book);
+  });
+
+  it('finds all books via GET', async () => {
+    const book1 = await Book.insert(rebecca);
+    const book2 = await Book.insert(castle);
+
+    const res = await request(app).get('/api/v1/books');
+
+    expect(res.body).toEqual([book1, book2]);
   });
 });
 
