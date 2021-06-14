@@ -59,4 +59,10 @@ describe('game routes', () => {
 
     expect(res.body).toEqual({ 'id': '1', ...updatedGame });
   });
+
+  it('DELETES game by id', async () => {
+    const game = await Game.insert(portal);
+    const res = await request(app).delete(`/api/v1/dollhouses/${game.id}`);
+    expect(res.body).toEqual(game);
+  });
 });
