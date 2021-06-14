@@ -55,7 +55,7 @@ describe('painting routes', () => {
       artist: 'Leonardo da Vinci'
     };
 
-    const res = await (await request(app).put(`/api/v1/paintings/${painting.id}`)).setEncoding(updatedPainting);
+    const res = await request(app).put(`/api/v1/paintings/${painting.id}`).send(updatedPainting);
     expect(res.body).toEqual({ 'id': '1', ...updatedPainting });
   });
 });
