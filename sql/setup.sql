@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS cats, dollhouses, books, paintings;
+DROP TABLE IF EXISTS cats, dollhouses, books, paintings, games;
 
 CREATE TABLE cats (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -27,4 +27,11 @@ CREATE TABLE paintings (
   title TEXT NOT NULL,
   museum TEXT NOT NULL,
   artist TEXT NOT NULL
+);
+
+CREATE TABLE games (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title TEXT NOT NULL,
+  studio TEXT NOT NULL,
+  rating INTEGER NOT NULL
 )
